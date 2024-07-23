@@ -1,6 +1,6 @@
 package com.example.lab_2
 
-class MainActivity {
+
 
     fun main() {
 
@@ -10,7 +10,6 @@ class MainActivity {
         val promedio = calcularPromedio(numeros)
         println("Números: $numeros")
         println("El promedio de los números es: $promedio")
-        println(numeros.average())
 
         //Funcion extraer números impares
         val numerosImpares = obtenerNumerosImpares(numeros)
@@ -18,7 +17,7 @@ class MainActivity {
 
         //Funcion para saber si es Palindromo
         var cadena = "reconocer"
-        val resultado = esPalindromo(cadena)?.let { "Es palíndromo" } ?: "No es palíndromo"
+        val resultado = if (esPalindromo(cadena)) "es palíndromo" else "no es palíndromo"
         println("$cadena $resultado")
 
 
@@ -34,7 +33,16 @@ class MainActivity {
         println("Resta: $resta")
 
 
+        //Mapear objeto Person a Student
+        val persons = listOf(Person("Juan", 25, "Male"),
+            Person("Maria", 30, "Female"),
+            Person("Pedro", 28, "Male"))
 
+        val studentId = (1..100000).random().toString()
+        val students = persons.map {personToStudent(it, studentId)  }
+        students.forEach { student ->
+            println("El estudiante: ${student.name} tiene ${student.age} años")
+        }
 
 
     }
@@ -60,7 +68,8 @@ class MainActivity {
         return operation(a, b)
     }
 
+    fun personToStudent(person: Person, studentId: String): Student {
+        return Student(person.name, person.age, person.gender, studentId)
+    }
 
 
-
-}
